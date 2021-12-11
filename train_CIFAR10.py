@@ -36,8 +36,8 @@ from repvgg import get_RepVGG_func_by_name
 CIFAR10_TRAINSET_SIZE = 50000
 
 parser = argparse.ArgumentParser(description='PyTorch CIFAR-10 Training')
-parser.add_argument('data', metavar='DIR',
-                    help='path to dataset')
+#parser.add_argument('data', metavar='DIR',
+#                    help='path to dataset')
 parser.add_argument('-a', '--arch', metavar='ARCH', default='RepVGG-A0')
 parser.add_argument('-j', '--workers', default=2, type=int, metavar='N',
                     help='number of data loading workers')
