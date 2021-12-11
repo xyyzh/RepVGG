@@ -38,6 +38,7 @@ CIFAR10_TRAINSET_SIZE = 50000
 parser = argparse.ArgumentParser(description='PyTorch CIFAR-10 Training')
 #parser.add_argument('data', metavar='DIR',
 #                    help='path to dataset')
+parser.add_argument('num_classes', type=int, default=10)
 parser.add_argument('-a', '--arch', metavar='ARCH', default='RepVGG-A0')
 parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
                     help='number of data loading workers')
@@ -106,6 +107,8 @@ def sgd_optimizer(model, lr, momentum, weight_decay, use_custwd):
     return optimizer
 
 def main():
+    
+    print("start")
     args = parser.parse_args()
 
     if args.seed is not None:
@@ -137,6 +140,7 @@ def main():
         mp.spawn(main_worker, nprocs=ngpus_per_node, args=(ngpus_per_node, args))
     else:
         # Simply call main_worker function
+        print("start to call main_worker")
         main_worker(args.gpu, ngpus_per_node, args)
 
 
@@ -160,7 +164,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
     repvgg_build_func = get_RepVGG_func_by_name(args.arch)
 
-    model = repvgg_build_func(deploy=False)
+    model = repvgg_build_func(deploy=False, num_classes=args.num_classes)
 
     is_main = not args.multiprocessing_distributed or (
                 args.multiprocessing_distributed and args.rank % ngpus_per_node == 0)

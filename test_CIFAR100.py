@@ -30,6 +30,7 @@ parser = argparse.ArgumentParser(description='PyTorch CIFAR-100 Test')
 #parser.add_argument('data', metavar='DIR', help='path to dataset')
 parser.add_argument('mode', metavar='MODE', default='train', choices=['train', 'deploy'], help='train or deploy')
 parser.add_argument('weights', metavar='WEIGHTS', help='path to the weights file')
+parser.add_argument('num_classes', type=int, default=100)
 parser.add_argument('-a', '--arch', metavar='ARCH', default='RepVGG-A0')
 parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
                     help='number of data loading workers (default: 4)')
@@ -48,7 +49,7 @@ def test():
         model = get_RepVGGplus_func_by_name(args.arch)(deploy=args.mode=='deploy', use_checkpoint=False)
     else:
         repvgg_build_func = get_RepVGG_func_by_name(args.arch)
-        model = repvgg_build_func(deploy=args.mode == 'deploy')
+        model = repvgg_build_func(deploy=args.mode == 'deploy', num_classes=args.num_classes)
 
     if not torch.cuda.is_available():
         print('using CPU, this will be slow')

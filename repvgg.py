@@ -193,8 +193,8 @@ optional_groupwise_layers = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
 g2_map = {l: 2 for l in optional_groupwise_layers}
 g4_map = {l: 4 for l in optional_groupwise_layers}
 
-def create_RepVGG_A0(deploy=False):
-    return RepVGG(num_blocks=[2, 4, 14, 1], num_classes=1000,
+def create_RepVGG_A0(num_classes, deploy=False):
+    return RepVGG(num_blocks=[2, 4, 14, 1], num_classes=num_classes,
                   width_multiplier=[0.75, 0.75, 0.75, 2.5], override_groups_map=None, deploy=deploy)
 
 def create_RepVGG_A1(deploy=False):
@@ -222,8 +222,8 @@ def create_RepVGG_B1g4(deploy=False):
                   width_multiplier=[2, 2, 2, 4], override_groups_map=g4_map, deploy=deploy)
 
 
-def create_RepVGG_B2(deploy=False):
-    return RepVGG(num_blocks=[4, 6, 16, 1], num_classes=1000,
+def create_RepVGG_B2(num_classes, deploy=False):
+    return RepVGG(num_blocks=[4, 6, 16, 1], num_classes=num_classes,
                   width_multiplier=[2.5, 2.5, 2.5, 5], override_groups_map=None, deploy=deploy)
 
 def create_RepVGG_B2g2(deploy=False):
